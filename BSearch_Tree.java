@@ -1,5 +1,3 @@
-package Templates;
-
 class Node{
     int data;
     Node left;
@@ -51,7 +49,13 @@ class BSearch_Tree{
 	    Tree t2 = new Tree();
         Node root = null;
         for(int i: arr)
-            t2.insert(root, i);
+            root = t2.insert(root, i);
         t2.postOrder(root);
+        System.out.println();
+        t2.preorder(root);
+        System.out.println();
+        t2.inOrder(root);
+
+
     }
 }

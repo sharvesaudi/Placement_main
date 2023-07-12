@@ -28,5 +28,6 @@ public class Queue{
         Queue que = new Queue(size);
         for (int i=0; i<size; i++)
             que.enqueue(sc.nextInt());
+        sc.close();
     }
 }
