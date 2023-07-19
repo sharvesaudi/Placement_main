@@ -1,66 +1,87 @@
-// You are using Java
-import java.util.*;
+
 class Node{
     int data;
-    Node left;
-    Node right;
-    Node (int x){
-        this.data=x;
-        this.left=null;
-        this.right=null;
+    Node left,right;
+    Node(){
+        left = null;
+        right = null;
+        
+    }
+    Node(int d){
+        data = d;
+        left = null;
+        right =null;
     }
 }
-class Tree{
-    Node root=null;
-    Node insert(int[] arr,int i){
-        Node root=null;
-        if(i<arr.length){
-            root=new Node(arr[i]);
-            root.left=insert(arr,2*i+1);
-            root.right=insert(arr,2*i+2);
+
+class Binarytree{
+    Node insert(Node root,int d){
+        
+        if(root == null){
+            Node newnode = new Node(d);
+            root = newnode;
+        }
+        else{
+            Node temp = root;
+            if(temp.left!= null && temp.right!=null)
+                temp.left = insert(temp.left,d);
+            
+            else if(temp.left!=null)
+                temp.right = insert(temp.right,d);
+            
+            else
+                temp.left =  insert(temp.left,d);
         }
         return root;
     }
-    void inOrder(Node root){
-        if(root!=null){
-            inOrder(root.left);
-            System.out.print(root.data+" ");
-            inOrder(root.right);
-        }
-    }
-    void preOrder(Node root){
+    
+    void preorder(Node root){
         if(root!=null){
             System.out.print(root.data+" ");
-            preOrder(root.left);
-            preOrder(root.right);
+            preorder(root.left);
+            preorder(root.right);
         }
+        
     }
-    void postOrder(Node root){
+    void inorder(Node root){
+        if(root != null){
+            inorder(root.left);
+            System.out.print(root.data+" ");
+            inorder(root.right);
+        }
+        
+    }
+    void postorder(Node root){
         if(root!=null){
-            postOrder(root.left);
-            postOrder(root.right);
+            postorder(root.left);
+            postorder(root.right);
             System.out.print(root.data+" ");
         }
     }
 }
+
 class BTree{
+    
     public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
-        Node root=null;
-        int arr[]=new int[5];
-        for(int i=0;i<5;i++){
-            arr[i]=sc.nextInt();
-            // System.out.print(arr[i]);
+        Binarytree bt = new Binarytree(); 
+        Node root = null;
+        int[] arr = {27,5,6,0,2,9};
+        for(int i: arr){
+            if(root==null){
+                root = new Node(i);
+            }
+            else{
+              bt.insert(root,i);
+            }
         }
-        Tree t2=new Tree();
         System.out.println("Preorder traversal:");
-        t2.root=t2.insert(arr,0);
-        t2.preOrder(t2.root);
+        bt.preorder(root);
         System.out.println();
         System.out.println("Inorder traversal:");
-        t2.inOrder(t2.root);
+        bt.inorder(root);
         System.out.println();
         System.out.println("Postorder traversal:");
-        t2.postOrder(t2.root);
+        bt.postorder(root);
     }
+    
 }
