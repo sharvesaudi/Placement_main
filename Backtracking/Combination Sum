@@ -1,0 +1,24 @@
+class Solution {
+    List<List<Integer>> answer = new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> temp = new ArrayList<>();
+        combo(0, 0, temp, candidates,candidates.length,target);
+        return answer;
+    }
+    public void combo(int i, int total, List<Integer> curr, int[] candidates, int n, int target){
+        if(i>=n || total>target)
+            return;
+        else if(target == total){
+            answer.add(new ArrayList<>(curr));
+            return;
+        }
+        if(candidates[i]<=target){
+            curr.add(candidates[i]);
+            //picking the number
+            combo(i, total+candidates[i], curr, candidates, n, target);
+            curr.remove(curr.size()-1);
+        }
+        //not pick the number
+        combo(i+1, total+candidates[i], curr, candidates, n, target);
+    }
+}

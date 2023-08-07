@@ -55,7 +55,5 @@ class BSearch_Tree{
         t2.preorder(root);
         System.out.println();
         t2.inOrder(root);
-
-
     }
 }
